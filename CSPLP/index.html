@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSPLP - Computer Studies Personalized Learning Platform</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+:root{
+    --primary:#A11414;
+    --primary-dark:#7A0E0E;
+    --secondary:#F59E0B;
+    --success:#16A34A;
+    --light:#FFFDF8;
+    --dark:#1F2937;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:var(--light);
+    color:var(--dark);
+    overflow-x:hidden;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family:'Poppins',sans-serif;
+}
+
+.primary-bg{
+    background:#A11414;
+}
+
+.primary-text{
+    color:var(--primary);
+}
+
+.secondary-bg{
+    background:var(--secondary);
+}
+
+.hero{
+    min-height:90vh;
+    background:
+    linear-gradient(
+    rgba(161,20,20,.90),
+    rgba(122,14,14,.95)),
+    url('assets/images/hero.jpg');
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+.glass{
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.2);
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    transition:.4s;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 25px 50px rgba(0,0,0,.15);
+}
+
+.module-image{
+    height:220px;
+    width:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.card:hover .module-image{
+    transform:scale(1.08);
+}
+
+.stats-card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.floating-btn{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    z-index:999;
+    background:var(--secondary);
+    color:white;
+    padding:15px 25px;
+    border-radius:50px;
+    font-weight:700;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="primary-bg text-white shadow-xl">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+        <!-- Logo -->
+        <div class="flex items-center gap-4">
+
+    <img src="../assets/images/logo.png"
+         alt="CSPLP Logo"
+         class="w-16 h-16 object-contain">
+
+    <div>
+
+        <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide text-white">
+            CSPLP
+        </h1>
+
+        <p class="text-sm md:text-base font-medium text-yellow-300 leading-tight">
+            Computer Studies Personalized Learning Platform
+        </p>
+
+    </div>
+
+</div>
+
+        <!-- Desktop Menu -->
+        <nav class="hidden md:flex gap-8">
+            <a href="#home" class="hover:text-yellow-300">Home</a>
+            <a href="#about" class="hover:text-yellow-300">About</a>
+            <a href="#process" class="hover:text-yellow-300">Process</a>
+            <a href="#contact" class="hover:text-yellow-300">Research Info</a>
+            <a href="../admin/dashboard.html" class="hover:text-yellow-300">Admin Dashboard</a>
+        </nav>
+
+        <!-- Button -->
+        <a href="consent.html"
+           class="hidden md:inline-block bg-white text-[#6B1F2A] px-5 py-2 rounded-lg font-semibold">
+            Begin Study
+        </a>
+
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero flex items-center text-white">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<div class="grid lg:grid-cols-2 gap-12 items-center">
+
+<div>
+
+<div class="glass inline-flex px-4 py-2 rounded-full mb-6">
+EKSU FIRST DEGREE RESEARCH PROJECT
+</div>
+
+<h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
+Computer Studies Personalized Learning Platform
+</h1>
+
+<p class="mt-6 text-xl text-gray-100">
+Investigating the impact of personalized analogies on the learning of Computer Studies among Senior Secondary School students in Ekiti State.
+</p>
+
+<div class="flex flex-wrap gap-4 mt-8">
+
+<a href="consent.html"
+class="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-4 rounded-xl font-semibold">
+Begin Study
+</a>
+
+<a href="#about"
+class="border border-white px-8 py-4 rounded-xl">
+Learn More
+</a>
+
+</div>
+
+<div class="flex flex-wrap gap-4 mt-10">
+
+<div class="glass px-4 py-3 rounded-xl">
+📘 Personalized Learning
+</div>
+
+<div class="glass px-4 py-3 rounded-xl">
+📊 Research Based
+</div>
+
+<div class="glass px-4 py-3 rounded-xl">
+🎓 EKSU Project
+</div>
+
+</div>
+
+</div>
+
+<div class="relative">
+
+    <!-- Main Image -->
+    <img src="../assets/images/image2.png"
+         class="w-full h-[550px] object-cover rounded-[30px] shadow-[0_25px_80px_rgba(0,0,0,0.4)]">
+
+    <!-- Floating Card 1 -->
+    <div class="absolute top-6 left-6 glass p-4 rounded-2xl">
+        <h4 class="font-bold text-lg">🎓 Research Project</h4>
+        <p class="text-sm">EKSU Science Education</p>
+    </div>
+
+    <!-- Floating Card 2 -->
+    <div class="absolute bottom-8 right-6 bg-white text-gray-800 p-5 rounded-2xl shadow-xl">
+        <h4 class="font-bold text-2xl text-red-700">10+</h4>
+        <p>Learning Modules</p>
+    </div>
+
+    <!-- Floating Card 3 -->
+    <div class="absolute bottom-32 left-6 bg-yellow-500 text-white p-4 rounded-2xl shadow-xl">
+        <h4 class="font-bold">Interactive Learning</h4>
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="py-20 -mt-12 relative z-20">
+
+<div class="max-w-6xl mx-auto px-6">
+
+<div class="grid md:grid-cols-4 gap-6">
+
+<div class="stats-card">
+<h3 class="text-4xl font-bold text-red-700">10+</h3>
+<p>Learning Modules</p>
+</div>
+
+<div class="stats-card">
+<h3 class="text-4xl font-bold text-yellow-500">2</h3>
+<p>Research Groups</p>
+</div>
+
+<div class="stats-card">
+<h3 class="text-4xl font-bold text-green-600">100%</h3>
+<p>Mobile Responsive</p>
+</div>
+
+<div class="stats-card">
+<h3 class="text-4xl font-bold text-red-700">EKSU</h3>
+<p>Research Project</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="py-24 bg-white">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<h2 class="text-4xl font-bold text-center mb-4 text-red-800">
+Why Use CSPLP?
+</h2>
+
+<p class="text-center text-gray-600 max-w-3xl mx-auto mb-14">
+A modern learning platform designed to support research and improve Computer Studies learning outcomes.
+</p>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+<div class="card p-8 text-center">
+<div class="text-5xl mb-4">🧠</div>
+<h3 class="font-bold text-xl mb-3">Personalized Learning</h3>
+<p>Lessons linked to familiar real-life experiences.</p>
+</div>
+
+<div class="card p-8 text-center">
+<div class="text-5xl mb-4">📊</div>
+<h3 class="font-bold text-xl mb-3">Research Driven</h3>
+<p>Supports educational research and data collection.</p>
+</div>
+
+<div class="card p-8 text-center">
+<div class="text-5xl mb-4">📱</div>
+<h3 class="font-bold text-xl mb-3">Mobile Friendly</h3>
+<p>Works perfectly on phones, tablets and computers.</p>
+</div>
+
+<div class="card p-8 text-center">
+<div class="text-5xl mb-4">🔒</div>
+<h3 class="font-bold text-xl mb-3">Secure Data</h3>
+<p>Responses are stored safely for analysis.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<!-- RESEARCH NOTICE -->
+<section class="cream py-10">
+    <div class="max-w-5xl mx-auto px-6">
+
+        <div class="bg-white border-l-8 border-[#6B1F2A] p-6 rounded-xl shadow">
+
+            <h3 class="font-bold text-xl wine-text mb-2">
+                Research Notice
+            </h3>
+
+            <p>
+                Participation in this study is voluntary.
+                Information collected will be used strictly for academic
+                research purposes and treated confidentially.
+            </p>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-20">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <h2 class="text-4xl font-bold text-center wine-text mb-12">
+            About the Study
+        </h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+            <div class="bg-white p-8 rounded-2xl shadow card-hover">
+                <div class="text-4xl mb-4">💡</div>
+                <h3 class="font-bold text-xl mb-3">
+                    Personalized Analogies
+                </h3>
+                <p>
+                    Learning Computer Studies concepts through familiar
+                    real-life experiences.
+                </p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow card-hover">
+                <div class="text-4xl mb-4">📘</div>
+                <h3 class="font-bold text-xl mb-3">
+                    Interactive Learning
+                </h3>
+                <p>
+                    Student-friendly lessons designed to improve understanding.
+                </p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow card-hover">
+                <div class="text-4xl mb-4">📊</div>
+                <h3 class="font-bold text-xl mb-3">
+                    Research Evaluation
+                </h3>
+                <p>
+                    Pre-tests, post-tests and questionnaires are used to
+                    evaluate learning outcomes.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- RESEARCH PROCESS -->
+<section id="process" class="cream py-20">
+
+    <div class="grid md:grid-cols-4 lg:grid-cols-7 gap-6 max-w-7xl mx-auto px-6">
+
+<div class="card p-6 text-center">
+<h3 class="text-4xl mb-3">1️⃣</h3>
+<p>Consent</p>
+</div>
+
+<div class="card p-6 text-center">
+<h3 class="text-4xl mb-3">2️⃣</h3>
+<p>Register</p>
+</div>
+
+<div class="card p-6 text-center">
+<h3 class="text-4xl mb-3">3️⃣</h3>
+<p>Pre-Test</p>
+</div>
+
+<div class="card p-6 text-center">
+<h3 class="text-4xl mb-3">4️⃣</h3>
+<p>Lessons</p>
+</div>
+
+<div class="card p-6 text-center">
+<h3 class="text-4xl mb-3">5️⃣</h3>
+<p>Post-Test</p>
+</div>
+
+<div class="card p-6 text-center">
+<h3 class="text-4xl mb-3">6️⃣</h3>
+<p>Questionnaire</p>
+</div>
+
+<div class="card p-6 text-center">
+<h3 class="text-4xl mb-3">7️⃣</h3>
+<p>Complete</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- LEARNING AREAS -->
+<section class="py-20">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <h2 class="text-4xl font-bold text-center primary-text mb-12">
+            Learning Areas
+        </h2>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+
+            <!-- Introduction to Computers -->
+            <div class="card">
+                <img src="../assets/images/intro-computer.jpg" class="module-image">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-red-800 mb-3">
+                        Introduction to Computers
+                    </h3>
+                    <p>
+                        Learn the meaning, characteristics, and importance of computers in everyday life.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Computer Hardware -->
+            <div class="card">
+                <img src="../assets/images/hardware.jpg" class="module-image">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-red-800 mb-3">
+                        Computer Hardware
+                    </h3>
+                    <p>
+                        Understanding the physical components of a computer system.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Software -->
+            <div class="card">
+                <img src="../assets/images/software.jpg" class="module-image">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-red-800 mb-3">
+                        Computer Software
+                    </h3>
+                    <p>
+                        Explore system software and application software used to perform tasks.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Input Devices -->
+            <div class="card">
+                <img src="../assets/images/input.jpg" class="module-image">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-red-800 mb-3">
+                        Input Devices
+                    </h3>
+                    <p>
+                        Learn how devices such as keyboards, mice, and scanners enter data into computers.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Output Devices -->
+            <div class="card">
+                <img src="../assets/images/output.jpg" class="module-image">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-red-800 mb-3">
+                        Output Devices
+                    </h3>
+                    <p>
+                        Understand devices that present information from the computer to users.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Storage Devices -->
+            <div class="card">
+                <img src="../assets/images/storage.jpg" class="module-image">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-red-800 mb-3">
+                        Storage Devices
+                    </h3>
+                    <p>
+                        Discover how computers save and retrieve information using various storage media.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Operating System -->
+            <div class="card">
+                <img src="../assets/images/os.jpg" class="module-image">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-red-800 mb-3">
+                        Operating System
+                    </h3>
+                    <p>
+                        Learn about the software that manages computer hardware and applications.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Computer Network -->
+            <div class="card">
+                <img src="../assets/images/network.jpg" class="module-image">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-red-800 mb-3">
+                        Computer Networks
+                    </h3>
+                    <p>
+                        Understand how computers communicate and share resources through networks.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Internet -->
+            <div class="card">
+                <img src="../assets/images/internet.jpg" class="module-image">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-red-800 mb-3">
+                        Internet
+                    </h3>
+                    <p>
+                        Explore online communication, information sharing, and digital services.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Computer Security -->
+            <div class="card">
+                <img src="../assets/images/security.jpg" class="module-image">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-red-800 mb-3">
+                        Computer Security
+                    </h3>
+                    <p>
+                        Learn how to protect computers, data, and users from digital threats.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- RESEARCH INFO -->
+<section id="contact" class="py-24 bg-[#FFFDF8] text-white">
+
+    <div class="max-w-6xl mx-auto px-6">
+
+        <div class="bg-[#A11414] rounded-3xl p-10 md:p-16 shadow-2xl">
+
+            <span class="bg-yellow-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                RESEARCH INFORMATION
+            </span>
+
+            <h2 class="text-4xl md:text-5xl font-bold mt-6 mb-6">
+                About This Research
+            </h2>
+
+            <p class="text-lg leading-relaxed mb-8">
+                The Impact of the Use of Personalized Analogies in the Learning of
+                Computer Studies in Senior Secondary Schools in Ekiti State.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <div class="bg-white/10 p-6 rounded-2xl">
+                    <h3 class="font-bold text-yellow-400 mb-2">
+                        Researcher
+                    </h3>
+                    <p>Nusaybah Ajoke Waliyullah</p>
+                </div>
+
+                <div class="bg-white/10 p-6 rounded-2xl">
+                    <h3 class="font-bold text-yellow-400 mb-2">
+                        Institution
+                    </h3>
+                    <p>Ekiti State University</p>
+                </div>
+
+                <div class="bg-white/10 p-6 rounded-2xl">
+                    <h3 class="font-bold text-yellow-400 mb-2">
+                        Department
+                    </h3>
+                    <p>Science Education</p>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="py-24 bg-gray-50">
+
+<div class="max-w-6xl mx-auto px-6">
+
+<div class="grid lg:grid-cols-2 gap-12 items-center">
+
+<div>
+<img src="../assets/images/objective.jpg"
+class="rounded-3xl shadow-2xl">
+</div>
+
+<div>
+
+<span class="text-red-700 font-semibold uppercase">
+Research Objectives
+</span>
+
+<h2 class="text-4xl font-bold mt-3 mb-6">
+Purpose of the Study
+</h2>
+
+<ul class="space-y-4">
+
+<li>✔ Determine students' achievement before the intervention.</li>
+
+<li>✔ Examine the effect of personalized analogies on learning.</li>
+
+<li>✔ Compare learning outcomes between groups.</li>
+
+<li>✔ Evaluate students' perceptions of the learning approach.</li>
+
+<li>✔ Generate data for educational research.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- CTA -->
+<section class="py-24">
+
+<div class="max-w-6xl mx-auto px-6">
+
+<div class="bg-gradient-to-r from-red-800 to-red-600 text-white rounded-[35px] p-12 md:p-20 shadow-2xl text-center">
+
+<h2 class="text-5xl font-bold mb-6">
+Ready to Participate?
+</h2>
+
+<p class="text-xl max-w-3xl mx-auto mb-10">
+Take part in this research study and contribute to improving the teaching and learning of Computer Studies in secondary schools.
+</p>
+
+<a href="consent.html"
+class="inline-block bg-yellow-500 hover:bg-yellow-600 text-white px-10 py-5 rounded-2xl font-bold text-lg shadow-xl transition">
+
+Begin Study →
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-[#7A0E0E] text-white pt-20 pb-10">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+
+<div>
+<h3 class="text-2xl font-bold mb-4">CSPLP</h3>
+<p>
+Computer Studies Personalized Learning Platform developed for academic research.
+</p>
+</div>
+
+<div>
+<h4 class="font-bold text-lg mb-4">Quick Links</h4>
+<ul class="space-y-2">
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#process">Research Process</a></li>
+<li><a href="../admin/dashboard.html">Admin Dashboard</a></li>
+</ul>
+</div>
+
+<div>
+<h4 class="font-bold text-lg mb-4">Research</h4>
+<ul class="space-y-2">
+<li>Quasi-Experimental Design</li>
+<li>Computer Studies</li>
+<li>Personalized Analogies</li>
+<li>Student Learning</li>
+</ul>
+</div>
+
+<div>
+<h4 class="font-bold text-lg mb-4">Institution</h4>
+<p>Ekiti State University</p>
+<p>Department of Science Education</p>
+<p>Ado-Ekiti, Nigeria</p>
+</div>
+
+</div>
+
+<hr class="my-10 border-white/20">
+
+<div class="text-center">
+
+<p>
+© Waliyullah-Nusaybah 2026 First Degree Project.
+All Rights Reserved.
+</p>
+
+</div>
+
+</div>
+
+</footer>
+
+</body>
+</html>

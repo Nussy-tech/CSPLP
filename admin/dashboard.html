@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSPLP Research Dashboard</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background: #f8f6f2;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .wine {
+        background: #a11414;
+      }
+
+      .card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .chart-container {
+        position: relative;
+        width: 100%;
+        height: 320px;
+      }
+
+      @media (max-width: 640px) {
+        .chart-container {
+          height: 260px;
+        }
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        background: #a11414;
+        color: white;
+        padding: 12px;
+        text-align: left;
+      }
+
+      td {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+      }
+
+      tr:hover {
+        background: #fafafa;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main id="adminLogin" class="max-w-md mx-auto px-6 py-16">
+      <section class="card p-8">
+        <h1 class="text-2xl font-bold text-red-800 mb-2">Administrator Sign In</h1>
+        <p class="text-gray-600 mb-6">Sign in with your authorized dashboard account.</p>
+
+        <form id="adminLoginForm" class="space-y-4">
+          <div>
+            <label for="adminEmail" class="block font-medium mb-2">Email</label>
+            <input
+              id="adminEmail"
+              name="email"
+              type="email"
+              autocomplete="username"
+              required
+              class="w-full border border-gray-300 rounded-lg px-4 py-3"
+            />
+          </div>
+          <div>
+            <label for="adminPassword" class="block font-medium mb-2">Password</label>
+            <input
+              id="adminPassword"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required
+              class="w-full border border-gray-300 rounded-lg px-4 py-3"
+            />
+          </div>
+          <button
+            id="adminLoginButton"
+            type="submit"
+            class="w-full bg-red-800 hover:bg-red-900 text-white font-semibold px-5 py-3 rounded-lg"
+          >
+            Sign In
+          </button>
+          <p id="adminAuthStatus" class="text-sm text-red-700" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <div id="dashboardApp" class="hidden">
+    <!-- HEADER -->
+    <header class="wine text-white py-6 shadow-lg">
+      <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        <div>
+          <h1 class="text-3xl font-bold">CSPLP Research Dashboard</h1>
+          <p class="text-sm opacity-90">Computer Studies Personalized Learning Platform</p>
+        </div>
+
+        <div class="text-right">
+          <p>Researcher: <strong>Nusaybah Ajoke Waliyullah</strong></p>
+          <p>EKSU • Science Education</p>
+          <button
+            id="adminSignOutButton"
+            type="button"
+            class="mt-2 bg-white text-red-800 px-4 py-2 rounded-lg font-semibold"
+          >
+            Sign Out
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="max-w-7xl mx-auto px-6 py-10">
+      <!-- SUMMARY CARDS -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 mb-10">
+        <div class="card p-6 text-center">
+          <h2 class="font-semibold">Participants</h2>
+          <p id="participantsCount" class="text-3xl font-bold text-red-800 mt-2">0</p>
+        </div>
+
+        <div class="card p-6 text-center">
+          <h2 class="font-semibold">Completed</h2>
+          <p id="completedCount" class="text-3xl font-bold text-green-700 mt-2">0</p>
+        </div>
+
+        <div class="card p-6 text-center">
+          <h2 class="font-semibold">Avg Pre-Test</h2>
+          <p id="avgPre" class="text-3xl font-bold text-blue-700 mt-2">—</p>
+        </div>
+
+        <div class="card p-6 text-center">
+          <h2 class="font-semibold">Avg Traditional</h2>
+          <p id="avgTrad" class="text-3xl font-bold text-yellow-700 mt-2">—</p>
+        </div>
+
+        <div class="card p-6 text-center">
+          <h2 class="font-semibold">Avg Personalized</h2>
+          <p id="avgPers" class="text-3xl font-bold text-purple-700 mt-2">—</p>
+        </div>
+      </div>
+
+      <!-- DEMOGRAPHICS -->
+      <section class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 mb-10" aria-label="Participant demographics">
+        <div class="card p-5 text-center">
+          <h2 class="font-semibold">Male Students</h2>
+          <p id="maleCount" class="text-3xl font-bold text-blue-700 mt-2">0</p>
+        </div>
+        <div class="card p-5 text-center">
+          <h2 class="font-semibold">Female Students</h2>
+          <p id="femaleCount" class="text-3xl font-bold text-pink-700 mt-2">0</p>
+        </div>
+        <div class="card p-5 text-center">
+          <h2 class="font-semibold">SS1 Students</h2>
+          <p id="ss1Count" class="text-3xl font-bold text-purple-700 mt-2">0</p>
+        </div>
+        <div class="card p-5 text-center">
+          <h2 class="font-semibold">SS2 Students</h2>
+          <p id="ss2Count" class="text-3xl font-bold text-indigo-700 mt-2">0</p>
+        </div>
+        <div class="card p-5 text-center">
+          <h2 class="font-semibold">SS3 Students</h2>
+          <p id="ss3Count" class="text-3xl font-bold text-teal-700 mt-2">0</p>
+        </div>
+      </section>
+
+      <!-- CHARTS -->
+      <section class="grid lg:grid-cols-2 gap-6 mb-10" aria-label="Research charts">
+        <div class="card p-6">
+          <h2 class="text-xl font-bold text-red-800 mb-4">Average Score Comparison</h2>
+          <div class="chart-container">
+            <canvas id="scoresChart" aria-label="Average scores for the three assessments"></canvas>
+          </div>
+        </div>
+        <div class="card p-6">
+          <h2 class="text-xl font-bold text-red-800 mb-4">Participants by Gender and Class</h2>
+          <div class="chart-container">
+            <canvas id="demographicsChart" aria-label="Participant counts by gender and class"></canvas>
+          </div>
+        </div>
+      </section>
+      <p id="chartsStatus" class="hidden text-sm text-red-700 mb-6" aria-live="polite"></p>
+
+      <!-- TEACHING METHOD COMPARISON -->
+      <section class="card p-6 mb-10" aria-labelledby="methodComparisonHeading">
+        <h2 id="methodComparisonHeading" class="text-2xl font-bold text-red-800 mb-4">
+          Traditional vs Personalized Comparison
+        </h2>
+        <p id="methodComparisonSummary" class="text-gray-700">
+          Comparison will be available when score data has been recorded.
+        </p>
+      </section>
+
+      <button
+        id="exportBtn"
+        type="button"
+        class="bg-green-700 text-white px-5 py-3 rounded-lg mb-5"
+      >
+        Export CSV
+      </button>
+
+      <!-- PARTICIPANT TABLE -->
+      <div class="card p-6 overflow-x-auto">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+          <h2 class="text-2xl font-bold text-red-800">Participant Records</h2>
+          <label class="sr-only" for="participantSearch">Search participants</label>
+          <input
+            id="participantSearch"
+            type="search"
+            placeholder="Search by ID, name, school, class..."
+            class="border border-gray-300 rounded-lg px-4 py-2 w-full md:max-w-sm"
+          />
+        </div>
+        <p id="searchResultCount" class="text-sm text-gray-600 mb-3" aria-live="polite"></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Age</th>
+              <th>School</th>
+              <th>Class</th>
+              <th>Pre</th>
+              <th>Trad</th>
+              <th>Pers</th>
+              <th>Questionnaire</th>
+              <th>Action</th>
+              <th>Status</th>
+              <th>Completion Date</th>
+            </tr>
+          </thead>
+
+          <tbody id="participantsTable">
+            <tr>
+              <td colspan="13" class="text-center">Loading data...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- FEEDBACK -->
+      <section class="card p-6 mt-10">
+        <h2 class="text-2xl font-bold mb-6 text-red-800">Student Feedback</h2>
+        <div id="feedbackContainer">
+          <p>No feedback available.</p>
+        </div>
+      </section>
+
+      <p id="dashboardStatus" class="mt-4 text-sm text-gray-600" aria-live="polite"></p>
+    </main>
+
+<script type="module">
+  import {
+    auth,
+    db,
+    collection,
+    getDocs,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signOut
+  } from '../js/firebase.js';
+  import { deleteDoc } from 'https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js';
+
+  const adminLogin = document.getElementById('adminLogin');
+  const dashboardApp = document.getElementById('dashboardApp');
+  const adminAuthStatus = document.getElementById('adminAuthStatus');
+  const adminLoginButton = document.getElementById('adminLoginButton');
+  let authorizationMessage = '';
+  const authorizedAdminUid = 'FlEm2elfypb0Bq41ru9IPwU4MAx2';
+  const table = document.getElementById('participantsTable');
+  const feedbackContainer = document.getElementById('feedbackContainer');
+  const status = document.getElementById('dashboardStatus');
+  const chartsStatus = document.getElementById('chartsStatus');
+  const questionnaireModal = document.getElementById('questionnaireModal');
+  const questionnaireContent = document.getElementById('questionnaireContent');
+  const participantSearch = document.getElementById('participantSearch');
+  let participants = [];
+  let scoresChart;
+  let demographicsChart;
+
+  function createCell(value) {
+    const cell = document.createElement('td');
+    cell.textContent = value ?? '';
+    return cell;
+  }
+
+  function getScore(value) {
+    if (value === null || value === undefined || value === '') {
+      return null;
+    }
+
+    const score = Number(value);
+    return Number.isFinite(score) ? score : null;
+  }
+
+  function getAverage(field) {
+    const scores = participants
+      .map((participant) => getScore(participant[field]))
+      .filter((score) => score !== null);
+
+    return scores.length
+      ? scores.reduce((total, score) => total + score, 0) / scores.length
+      : null;
+  }
+
+  function updateAverage(elementId, field) {
+    const average = getAverage(field);
+    document.getElementById(elementId).textContent =
+      average === null ? '—' : average.toFixed(2);
+  }
+
+  function updateMethodComparison() {
+    const traditionalAverage = getAverage('traditionalQuizScore');
+    const personalizedAverage = getAverage('personalizedQuizScore');
+    const summary = document.getElementById('methodComparisonSummary');
+
+    if (traditionalAverage === null || personalizedAverage === null) {
+      summary.textContent = 'Comparison will be available when both methods have score data.';
+      return;
+    }
+
+    const difference = personalizedAverage - traditionalAverage;
+    const result = difference > 0
+      ? `Personalized scores average ${difference.toFixed(2)} points higher than traditional scores.`
+      : difference < 0
+        ? `Traditional scores average ${Math.abs(difference).toFixed(2)} points higher than personalized scores.`
+        : 'Traditional and personalized scores have the same average.';
+
+    summary.textContent =
+      `Traditional average: ${traditionalAverage.toFixed(2)}/10. ` +
+      `Personalized average: ${personalizedAverage.toFixed(2)}/10. ${result}`;
+  }
+
+  function getCompletionDate(participant) {
+    const value = participant.completedAt;
+    const date = value && typeof value.toDate === 'function'
+      ? value.toDate()
+      : value
+        ? new Date(value)
+        : null;
+
+    return date && !Number.isNaN(date.getTime())
+      ? date.toLocaleString()
+      : '';
+  }
+
+  function getFilteredParticipants() {
+    const query = participantSearch.value.trim().toLocaleLowerCase();
+    if (!query) {
+      return participants;
+    }
+
+    return participants.filter((participant) => {
+      const searchableValues = [
+        participant.participantId,
+        participant.fullName,
+        participant.gender,
+        participant.age,
+        participant.school,
+        participant.studentClass,
+        participant.status,
+        participant.feedback,
+        JSON.stringify(participant.questionnaire || {})
+      ];
+
+      return searchableValues.some((value) =>
+        String(value ?? '').toLocaleLowerCase().includes(query)
+      );
+    });
+  }
+
+  function renderParticipantTable() {
+    const filteredParticipants = getFilteredParticipants();
+    table.replaceChildren();
+    document.getElementById('searchResultCount').textContent =
+      `Showing ${filteredParticipants.length} of ${participants.length} participant(s).`;
+
+    if (filteredParticipants.length === 0) {
+      const row = document.createElement('tr');
+      const cell = createCell(
+        participants.length ? 'No participants match your search.' : 'No participant records found.'
+      );
+      cell.colSpan = 13;
+      cell.className = 'text-center';
+      row.append(cell);
+      table.append(row);
+      return;
+    }
+
+    filteredParticipants.forEach((participant) => {
+      const row = document.createElement('tr');
+      const values = [
+        participant.participantId,
+        participant.fullName,
+        participant.gender,
+        participant.age,
+        participant.school,
+        participant.studentClass,
+        participant.preTestScore ?? '',
+        participant.traditionalQuizScore ?? '',
+        participant.personalizedQuizScore ?? ''
+      ];
+
+      values.forEach((value) => row.append(createCell(value)));
+
+      const questionnaireCell = document.createElement('td');
+      const viewButton = document.createElement('button');
+      viewButton.type = 'button';
+      viewButton.className = 'bg-blue-600 text-white px-3 py-1 rounded';
+      viewButton.textContent = 'View';
+      viewButton.addEventListener('click', () => viewQuestionnaire(participant));
+      questionnaireCell.append(viewButton);
+      row.append(questionnaireCell);
+
+      const actionCell = document.createElement('td');
+      const deleteButton = document.createElement('button');
+      deleteButton.type = 'button';
+      deleteButton.className = 'bg-red-600 text-white px-3 py-1 rounded';
+      deleteButton.textContent = 'Delete';
+      deleteButton.addEventListener('click', () => deleteParticipant(participant.id));
+      actionCell.append(deleteButton);
+      row.append(actionCell);
+
+      row.append(createCell(participant.status));
+      row.append(createCell(getCompletionDate(participant)));
+      table.append(row);
+    });
+  }
+
+  function renderFeedback() {
+    feedbackContainer.replaceChildren();
+    const feedbackParticipants = participants.filter(
+      (participant) => typeof participant.feedback === 'string' && participant.feedback.trim()
+    );
+
+    if (feedbackParticipants.length === 0) {
+      const emptyMessage = document.createElement('p');
+      emptyMessage.textContent = 'No feedback available.';
+      feedbackContainer.append(emptyMessage);
+      return;
+    }
+
+    feedbackParticipants.forEach((participant) => {
+      const card = document.createElement('div');
+      card.className = 'border rounded-xl p-4 mb-4';
+
+      const name = document.createElement('h3');
+      name.className = 'font-bold text-red-800';
+      name.textContent = participant.fullName || 'Anonymous participant';
+
+      const school = document.createElement('p');
+      school.className = 'text-sm text-gray-500 mb-2';
+      school.textContent = participant.school || '';
+
+      const feedback = document.createElement('p');
+      feedback.textContent = participant.feedback;
+
+      card.append(name, school, feedback);
+      feedbackContainer.append(card);
+    });
+  }
+
+  function renderCharts() {
+    if (!window.Chart) {
+      chartsStatus.textContent = 'Charts are unavailable because the chart library did not load.';
+      chartsStatus.classList.remove('hidden');
+      console.error('Chart.js did not load; dashboard charts could not be rendered.');
+      return;
+    }
+
+    const chartAverages = [
+      getAverage('preTestScore'),
+      getAverage('traditionalQuizScore'),
+      getAverage('personalizedQuizScore')
+    ];
+    const genderCounts = ['Male', 'Female'].map((gender) =>
+      participants.filter(
+        (participant) => String(participant.gender || '').trim().toLowerCase() === gender.toLowerCase()
+      ).length
+    );
+    const classCounts = ['SS1', 'SS2', 'SS3'].map((studentClass) =>
+      participants.filter(
+        (participant) => String(participant.studentClass || '').trim().toUpperCase() === studentClass
+      ).length
+    );
+
+    if (scoresChart) {
+      scoresChart.destroy();
+    }
+    if (demographicsChart) {
+      demographicsChart.destroy();
+    }
+
+    scoresChart = new window.Chart(document.getElementById('scoresChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Pre-Test', 'Traditional', 'Personalized'],
+        datasets: [{
+          label: 'Average score out of 10',
+          data: chartAverages,
+          backgroundColor: ['#2563eb', '#ca8a04', '#7e22ce']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        devicePixelRatio: Math.max(window.devicePixelRatio || 1, 3),
+        plugins: {
+          legend: {
+            labels: {
+              font: { size: 14 }
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: { font: { size: 14 } }
+          },
+          y: {
+            beginAtZero: true,
+            max: 10,
+            ticks: { font: { size: 14 } },
+            grid: { lineWidth: 1 }
+          }
+        }
+      }
+    });
+
+    demographicsChart = new window.Chart(document.getElementById('demographicsChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Gender', 'SS1', 'SS2', 'SS3'],
+        datasets: [
+          {
+            label: 'Male',
+            data: [genderCounts[0], null, null, null],
+            backgroundColor: '#2563eb'
+          },
+          {
+            label: 'Female',
+            data: [genderCounts[1], null, null, null],
+            backgroundColor: '#db2777'
+          },
+          {
+            label: 'Students by class',
+            data: [null, ...classCounts],
+            backgroundColor: '#7e22ce'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        devicePixelRatio: Math.max(window.devicePixelRatio || 1, 3),
+        plugins: {
+          legend: {
+            labels: {
+              font: { size: 14 }
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: { font: { size: 14 } }
+          },
+          y: {
+            beginAtZero: true,
+            ticks: { precision: 0, font: { size: 14 } },
+            grid: { lineWidth: 1 }
+          }
+        }
+      }
+    });
+
+    chartsStatus.classList.add('hidden');
+  }
+
+  function renderDashboard() {
+    document.getElementById('participantsCount').textContent = participants.length;
+    document.getElementById('completedCount').textContent =
+      participants.filter((participant) => participant.status === 'Completed').length;
+
+    document.getElementById('maleCount').textContent = participants.filter(
+      (participant) => String(participant.gender || '').trim().toLowerCase() === 'male'
+    ).length;
+    document.getElementById('femaleCount').textContent = participants.filter(
+      (participant) => String(participant.gender || '').trim().toLowerCase() === 'female'
+    ).length;
+    ['SS1', 'SS2', 'SS3'].forEach((studentClass) => {
+      const count = participants.filter(
+        (participant) => String(participant.studentClass || '').trim().toUpperCase() === studentClass
+      ).length;
+      document.getElementById(`${studentClass.toLowerCase()}Count`).textContent = count;
+    });
+
+    updateAverage('avgPre', 'preTestScore');
+    updateAverage('avgTrad', 'traditionalQuizScore');
+    updateAverage('avgPers', 'personalizedQuizScore');
+    updateMethodComparison();
+    renderParticipantTable();
+    renderFeedback();
+    renderCharts();
+  }
+
+  function viewQuestionnaire(participant) {
+    const answers = participant.questionnaire || {};
+    questionnaireContent.replaceChildren();
+
+    for (let questionNumber = 1; questionNumber <= 10; questionNumber++) {
+      const answer = document.createElement('p');
+      const label = document.createElement('strong');
+      label.textContent = `Q${questionNumber}: `;
+      answer.append(label, document.createTextNode(answers[`q${questionNumber}`] || ''));
+      questionnaireContent.append(answer);
+    }
+
+    questionnaireModal.classList.remove('hidden');
+  }
+
+  async function deleteParticipant(participantId) {
+    if (!confirm('Delete this participant?')) {
+      return;
+    }
+
+    try {
+      await deleteDoc(doc(db, 'participants', participantId));
+      participants = participants.filter((participant) => participant.id !== participantId);
+      renderDashboard();
+      status.textContent = 'Participant record deleted.';
+    } catch (error) {
+      console.error('Error deleting participant:', error);
+      status.textContent = 'Could not delete the participant record. Check the console for details.';
+    }
+  }
+
+  document.getElementById('closeQuestionnaireModal').addEventListener('click', () => {
+    questionnaireModal.classList.add('hidden');
+  });
+  participantSearch.addEventListener('input', renderParticipantTable);
+
+  document.getElementById('adminLoginForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    adminAuthStatus.textContent = '';
+    adminLoginButton.disabled = true;
+
+    const email = document.getElementById('adminEmail').value.trim();
+    const password = document.getElementById('adminPassword').value;
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      document.getElementById('adminLoginForm').reset();
+    } catch (error) {
+      console.error('Administrator sign-in failed:', error);
+      adminAuthStatus.textContent =
+        'Sign-in failed. Check your email and password, then try again.';
+    } finally {
+      adminLoginButton.disabled = false;
+    }
+  });
+
+  document.getElementById('adminSignOutButton').addEventListener('click', async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error('Administrator sign-out failed:', error);
+      status.textContent = 'Could not sign out. Please try again.';
+    }
+  });
+
+  document.getElementById('exportBtn').addEventListener('click', () => {
+    const columns = [
+      'Participant ID',
+      'Name',
+      'Gender',
+      'Age',
+      'School',
+      'Class',
+      'Pre-Test Score',
+      'Traditional Score',
+      'Personalized Score',
+      'Questionnaire',
+      'Feedback',
+      'Status',
+      'Completion Date'
+    ];
+    const escapeCsvValue = (value) => `"${String(value ?? '').replace(/"/g, '""')}"`;
+    const rows = participants.map((participant) => [
+      participant.participantId,
+      participant.fullName,
+      participant.gender,
+      participant.age,
+      participant.school,
+      participant.studentClass,
+      participant.preTestScore,
+      participant.traditionalQuizScore,
+      participant.personalizedQuizScore,
+      JSON.stringify(participant.questionnaire || {}),
+      participant.feedback,
+      participant.status,
+      getCompletionDate(participant)
+    ]);
+    const csv = [columns, ...rows].map((row) => row.map(escapeCsvValue).join(',')).join('\r\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+
+    link.href = url;
+    link.download = 'CSPLP_Research_Data.csv';
+    link.click();
+    URL.revokeObjectURL(url);
+  });
+
+  async function loadParticipants() {
+    status.textContent = 'Loading participant records...';
+
+    try {
+      const participantsSnapshot = await getDocs(collection(db, 'participants'));
+      participants = participantsSnapshot.docs.map((participantDocument) => ({
+        id: participantDocument.id,
+        ...participantDocument.data()
+      }));
+
+      renderDashboard();
+      status.textContent = `Loaded ${participants.length} participant record(s).`;
+    } catch (error) {
+      console.error('Error loading participants:', error);
+      table.replaceChildren();
+      const row = document.createElement('tr');
+      const cell = createCell('Could not load participant records. Check the console for details.');
+      cell.colSpan = 13;
+      cell.className = 'text-center text-red-700';
+      row.append(cell);
+      table.append(row);
+      status.textContent = 'Firebase data could not be loaded.';
+      status.classList.add('text-red-700');
+    }
+  }
+
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      adminLogin.classList.remove('hidden');
+      dashboardApp.classList.add('hidden');
+      participants = [];
+      adminAuthStatus.textContent = authorizationMessage;
+      authorizationMessage = '';
+      return;
+    }
+
+    (async () => {
+      try {
+        if (user.uid !== authorizedAdminUid) {
+          authorizationMessage = 'This account is not authorized to access the admin dashboard.';
+          await signOut(auth);
+          return;
+        }
+
+        adminAuthStatus.textContent = '';
+        adminLogin.classList.add('hidden');
+        dashboardApp.classList.remove('hidden');
+        await loadParticipants();
+      } catch (error) {
+        console.error('Could not verify administrator access:', error);
+        authorizationMessage = 'Could not verify administrator access. Please try again later.';
+        await signOut(auth);
+      }
+    })();
+  });
+
+</script>
+
+    <div
+      id="questionnaireModal"
+      class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+    >
+      <div class="bg-white rounded-xl p-6 w-[90%] max-w-2xl">
+        <h2 class="text-2xl font-bold mb-4">Questionnaire Responses</h2>
+        <div id="questionnaireContent"></div>
+        <button
+          id="closeQuestionnaireModal"
+          type="button"
+          class="mt-4 bg-red-700 text-white px-4 py-2 rounded"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+    </div>
+  </body>
+</html>

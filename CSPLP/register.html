@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>CSPLP - Participant Registration</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background: #fffdf8;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .primary {
+        background: #a11414;
+      }
+
+      .primary-dark {
+        background: #7a0e0e;
+      }
+
+      .card {
+        background: white;
+        border-radius: 24px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+      }
+
+      .hero {
+        background: linear-gradient(rgba(161, 20, 20, 0.92), rgba(122, 14, 14, 0.95)),
+          url('../assets/images/register-bg.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        outline: none;
+        transition: 0.3s;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: #a11414;
+        box-shadow: 0 0 0 3px rgba(161, 20, 20, 0.15);
+      }
+
+      .btn {
+        background: #a11414;
+        color: white;
+        padding: 16px;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+
+      .btn:hover {
+        background: #7a0e0e;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HERO -->
+    <section class="hero py-20 text-white">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <span class="bg-yellow-500 px-5 py-2 rounded-full font-medium">CSPLP Registration</span>
+
+        <h1 class="text-4xl md:text-6xl font-bold mt-6">Participant Registration</h1>
+
+        <p class="mt-6 text-lg max-w-3xl mx-auto">
+          Kindly provide the information below before proceeding to the study activities.
+        </p>
+      </div>
+    </section>
+
+    <!-- REGISTRATION FORM -->
+    <section class="py-20">
+      <div class="max-w-3xl mx-auto px-6">
+        <div class="card p-8 md:p-12">
+          <h2 class="text-3xl font-bold text-red-800 mb-2">Registration Form</h2>
+
+          <p class="text-gray-600 mb-8">
+            All information provided will be used strictly for academic research purposes.
+          </p>
+
+          <form id="registrationForm">
+            <!-- Full Name -->
+            <div class="mb-6">
+              <label class="block font-medium mb-2">Full Name</label>
+              <input type="text" id="fullName" placeholder="Enter your full name" required />
+            </div>
+
+            <!-- Gender -->
+            <div class="mb-6">
+              <label class="block font-medium mb-2">Gender</label>
+              <select id="gender" required>
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+            </div>
+
+            <!-- Age -->
+            <div class="mb-6">
+              <label class="block font-medium mb-2">Age</label>
+              <input type="number" id="age" min="10" max="25" placeholder="Enter your age" required />
+            </div>
+
+            <!-- School -->
+            <div class="mb-6">
+              <label class="block font-medium mb-2">School Name</label>
+              <input type="text" id="school" placeholder="Enter your school name" required />
+            </div>
+
+            <!-- Class -->
+            <div class="mb-8">
+              <label class="block font-medium mb-2">Class</label>
+
+              <select id="studentClass" required>
+                <option value="">Select Class</option>
+                <option>SS1</option>
+                <option>SS2</option>
+                <option>SS3</option>
+              </select>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn w-full">Proceed to Pre-Test →</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="primary-dark text-white py-8">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <p>© Waliyullah-Nusaybah 2026 First Degree Project</p>
+
+        <p class="mt-2">Computer Studies Personalized Learning Platform (CSPLP)</p>
+      </div>
+    </footer>
+
+    <script>
+      const participantId = 'CSPLP-' + Date.now();
+
+      document.getElementById('registrationForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const participant = {
+          participantId: participantId,
+          fullName: document.getElementById('fullName').value.trim(),
+          gender: document.getElementById('gender').value,
+          age: Number(document.getElementById('age').value),
+          school: document.getElementById('school').value.trim(),
+          studentClass: document.getElementById('studentClass').value
+        };
+
+        if (!participant.fullName || !participant.gender || !participant.age || !participant.school || !participant.studentClass) {
+          alert('Please complete all fields before continuing.');
+          return;
+        }
+
+        localStorage.setItem('participant', JSON.stringify(participant));
+        window.location.href = 'pretest.html';
+      });
+    </script>
+  </body>
+</html>

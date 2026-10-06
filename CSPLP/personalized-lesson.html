@@ -1,0 +1,381 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CSPLP - Personalized Analogy Learning Method</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#FFFDF8;
+}
+
+h1,h2,h3,h4{
+    font-family:'Poppins',sans-serif;
+}
+
+.hero{
+    background:
+    linear-gradient(
+    rgba(161,20,20,.92),
+    rgba(122,14,14,.95)
+    ),
+    url('../assets/images/personalized-bg.jpg');
+
+    background-size:cover;
+    background-position:center;
+}
+
+.lesson-card{
+    background:white;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    margin-bottom:40px;
+}
+
+.lesson-image{
+    width:100%;
+    height:380px;
+    object-fit:contain;
+    background:#f8f8f8;
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero py-20 text-white">
+
+    <div class="max-w-6xl mx-auto px-6 text-center">
+
+        <span class="bg-yellow-500 text-black px-5 py-2 rounded-full font-semibold">
+            Personalized Analogy Learning Method
+        </span>
+
+        <h1 class="text-4xl md:text-6xl font-bold mt-6">
+            Learn Computer Hardware Through Familiar Experiences
+        </h1>
+
+        <p class="mt-4 text-lg">
+            Understanding computer concepts using examples from everyday school life.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- CONTENT -->
+<section class="py-16">
+
+<div class="max-w-6xl mx-auto px-6">
+
+    <!-- Progress -->
+    <div class="mb-10">
+
+        <div class="flex justify-between mb-2">
+            <span class="font-semibold">Progress</span>
+            <span>Step 6 of 9</span>
+        </div>
+
+        <div class="w-full bg-gray-200 rounded-full h-3">
+            <div class="bg-red-700 h-3 rounded-full" style="width:66%"></div>
+        </div>
+
+    </div>
+
+    <!-- INTRO -->
+    <div class="bg-red-50 border-l-4 border-red-700 p-6 rounded-xl mb-10">
+
+        <h2 class="font-bold text-2xl text-red-800 mb-4">
+            Why Learn Through Analogies?
+        </h2>
+
+        <p>
+            Sometimes new computer concepts may appear difficult.
+            Personalized analogies help us connect new knowledge to experiences we already understand.
+            In this lesson, Computer Hardware concepts will be explained using familiar examples from school and everyday life.
+        </p>
+
+    </div>
+
+    <!-- HARDWARE -->
+    <div class="lesson-card">
+
+        <img src="../assets/images/school-building.jpg"
+        class="lesson-image"
+        alt="School Building">
+
+        <div class="p-8">
+
+            <h2 class="text-3xl font-bold text-red-800 mb-4">
+                Computer Hardware
+            </h2>
+
+            <p class="leading-relaxed text-gray-700">
+                Imagine your school.
+                The classrooms, desks, chairs, gates, whiteboards and buildings are things you can physically see and touch.
+            </p>
+
+            <p class="mt-4 leading-relaxed text-gray-700">
+                In the same way, Computer Hardware refers to all the physical parts of a computer that can be seen and touched.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- INPUT -->
+    <div class="lesson-card">
+
+        <img src="../assets/images/student-assignment.jpg"
+        class="lesson-image"
+        alt="Student Assignment">
+
+        <div class="p-8">
+
+            <h2 class="text-3xl font-bold text-red-800 mb-4">
+                Input Devices
+            </h2>
+
+            <p class="leading-relaxed text-gray-700">
+                Think about when a teacher gives an assignment.
+                Students submit their answers through their notebooks.
+            </p>
+
+            <p class="mt-4 leading-relaxed text-gray-700">
+                The notebook becomes the means through which information enters the teacher.
+                Similarly, Input Devices are used to enter information into a computer.
+            </p>
+
+            <ul class="list-disc pl-6 mt-4 space-y-2">
+                <li>Keyboard</li>
+                <li>Mouse</li>
+                <li>Scanner</li>
+                <li>Microphone</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- OUTPUT -->
+    <div class="lesson-card">
+
+        <img src="../assets/images/teacher-result.jpg"
+        class="lesson-image"
+        alt="Teacher Returning Result">
+
+        <div class="p-8">
+
+            <h2 class="text-3xl font-bold text-red-800 mb-4">
+                Output Devices
+            </h2>
+
+            <p class="leading-relaxed text-gray-700">
+                After marking assignments, a teacher returns the result to students.
+            </p>
+
+            <p class="mt-4 leading-relaxed text-gray-700">
+                This is information coming back to the learner.
+                Output devices work similarly by presenting processed information from the computer to the user.
+            </p>
+
+            <ul class="list-disc pl-6 mt-4 space-y-2">
+                <li>Monitor</li>
+                <li>Printer</li>
+                <li>Speakers</li>
+                <li>Projector</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- STORAGE -->
+    <div class="lesson-card">
+
+        <img src="../assets/images/school-bag.jpg"
+        class="lesson-image"
+        alt="School Bag">
+
+        <div class="p-8">
+
+            <h2 class="text-3xl font-bold text-red-800 mb-4">
+                Storage Devices
+            </h2>
+
+            <p class="leading-relaxed text-gray-700">
+                A school bag stores books and materials for future use.
+                A cupboard stores items safely until they are needed.
+            </p>
+
+            <p class="mt-4 leading-relaxed text-gray-700">
+                Storage devices perform a similar role in a computer system by keeping information for future use.
+            </p>
+
+            <ul class="list-disc pl-6 mt-4 space-y-2">
+                <li>Hard Disk</li>
+                <li>Flash Drive</li>
+                <li>Memory Card</li>
+                <li>CD/DVD</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- CPU -->
+    <div class="lesson-card">
+
+        <img src="../assets/images/principal.jpg"
+        class="lesson-image"
+        alt="Principal">
+
+        <div class="p-8">
+
+            <h2 class="text-3xl font-bold text-red-800 mb-4">
+                Central Processing Unit (CPU)
+            </h2>
+
+            <p class="leading-relaxed text-gray-700">
+                Think of the school principal.
+            </p>
+
+            <p class="mt-4 leading-relaxed text-gray-700">
+                The principal coordinates activities, supervises operations and ensures that the school functions properly.
+            </p>
+
+            <p class="mt-4 leading-relaxed text-gray-700">
+                Likewise, the CPU processes instructions and controls the activities of the computer.
+                This is why the CPU is often called the brain of the computer.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- ANALOGY TABLE -->
+    <div class="bg-white rounded-2xl shadow-lg p-8 mb-10">
+
+        <h2 class="text-3xl font-bold text-red-800 mb-6 text-center">
+            Analogy Summary
+        </h2>
+
+        <div class="overflow-x-auto">
+
+            <table class="w-full border border-gray-300">
+
+                <thead class="bg-red-700 text-white">
+
+                    <tr>
+                        <th class="p-4">Everyday Experience</th>
+                        <th class="p-4">Computer Concept</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td class="border p-4">School Building</td>
+                        <td class="border p-4">Computer Hardware</td>
+                    </tr>
+
+                    <tr>
+                        <td class="border p-4">Submitting Assignment</td>
+                        <td class="border p-4">Input Device</td>
+                    </tr>
+
+                    <tr>
+                        <td class="border p-4">Teacher Returning Result</td>
+                        <td class="border p-4">Output Device</td>
+                    </tr>
+
+                    <tr>
+                        <td class="border p-4">School Bag</td>
+                        <td class="border p-4">Storage Device</td>
+                    </tr>
+
+                    <tr>
+                        <td class="border p-4">Principal</td>
+                        <td class="border p-4">CPU</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- REFLECTION -->
+    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-xl mb-10">
+
+        <h3 class="font-bold text-xl mb-3">
+            Think About It
+        </h3>
+
+        <p>
+            Can you think of other examples in your daily life that are similar to computer hardware components?
+            Relating new concepts to familiar experiences helps improve understanding and retention.
+        </p>
+
+    </div>
+
+    <!-- NEXT BUTTON -->
+    <div class="text-center">
+
+        <a href="personalized-quiz.html"
+        class="inline-block bg-red-700 hover:bg-red-800 text-white px-10 py-4 rounded-xl font-bold text-lg">
+
+            Proceed to Personalized Quiz →
+
+        </a>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-red-900 text-white py-10 mt-16">
+
+    <div class="max-w-6xl mx-auto px-6 text-center">
+
+        <h3 class="font-bold text-xl mb-2">
+            Computer Studies Personalized Learning Platform (CSPLP)
+        </h3>
+
+        <p>
+            © Waliyullah-Nusaybah 2026 First Degree Project
+        </p>
+
+        <p class="mt-2">
+            Department of Science Education,
+            Ekiti State University, Ado-Ekiti
+        </p>
+
+        <p class="mt-4 text-sm opacity-80">
+            Investigating the Impact of Personalized Analogies in the Learning of Computer Studies among Senior Secondary School Students in Ekiti State.
+        </p>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
+

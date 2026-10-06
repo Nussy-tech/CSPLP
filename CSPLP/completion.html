@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>CSPLP - Study Completed</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background: #fffdf8;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .hero {
+        background: linear-gradient(rgba(161, 20, 20, 0.95), rgba(122, 14, 14, 0.95));
+      }
+
+      .result-card {
+        background: white;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- SAVE COMPLETION -->
+    <script>
+      const participant = JSON.parse(localStorage.getItem('participant') || 'null');
+
+      if (participant) {
+        participant.completedAt = new Date().toISOString();
+        participant.status = 'Completed';
+        localStorage.setItem('participant', JSON.stringify(participant));
+      }
+    </script>
+
+    <!-- HERO -->
+    <section class="hero py-20 text-white">
+      <div class="max-w-5xl mx-auto px-6 text-center">
+        <div class="text-7xl mb-6">🎉</div>
+
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">Study Completed Successfully</h1>
+
+        <p class="text-xl">Thank you for participating in this research study.</p>
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="py-16">
+      <div class="max-w-5xl mx-auto px-6">
+        <!-- Progress -->
+        <div class="mb-10">
+          <div class="flex justify-between mb-2">
+            <span>Progress</span>
+            <span>Step 9 of 9</span>
+          </div>
+
+          <div class="w-full bg-gray-200 rounded-full h-3">
+            <div class="bg-green-600 h-3 rounded-full" style="width: 100%"></div>
+          </div>
+        </div>
+
+        <!-- Thank You -->
+        <div class="result-card p-10 text-center mb-10">
+          <h2 class="text-3xl font-bold text-red-800 mb-6">Thank You</h2>
+
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Your responses have been recorded successfully. The information you provided will be used
+            strictly for academic purposes and treated confidentially.
+          </p>
+
+          <p class="mt-6 text-gray-700">
+            Your participation contributes to research on improving the teaching and learning of
+            Computer Studies in Senior Secondary Schools.
+          </p>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="result-card p-10 mb-10">
+          <h2 class="text-2xl font-bold text-red-800 mb-6">Participation Summary</h2>
+
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-red-50 p-6 rounded-xl text-center">
+              <h3 class="font-semibold mb-2">Pre-Test Score</h3>
+              <p id="preScore" class="text-3xl font-bold text-red-700">--</p>
+            </div>
+
+            <div class="bg-yellow-50 p-6 rounded-xl text-center">
+              <h3 class="font-semibold mb-2">Traditional Method Score</h3>
+              <p id="tradScore" class="text-3xl font-bold text-yellow-700">--</p>
+            </div>
+
+            <div class="bg-green-50 p-6 rounded-xl text-center">
+              <h3 class="font-semibold mb-2">Personalized Analogy Score</h3>
+              <p id="personalScore" class="text-3xl font-bold text-green-700">--</p>
+            </div>
+          </div>
+
+          <p id="firebaseSaveStatus" class="mt-6 text-center text-sm text-gray-600" aria-live="polite">
+            Saving your study results...
+          </p>
+        </div>
+
+        <!-- STUDY INFO -->
+        <div class="bg-white rounded-3xl shadow-lg p-8">
+          <h2 class="text-2xl font-bold text-red-800 mb-4">Research Information</h2>
+
+          <p class="mb-3">
+            <strong>Research Topic:</strong>
+            The Impact of the Use of Personalized Analogies in the Learning of Computer Studies in
+            Senior Secondary Schools in Ekiti State.
+          </p>
+
+          <p class="mb-3">
+            <strong>Researcher:</strong>
+            Nusaybah Ajoke Waliyullah
+          </p>
+
+          <p class="mb-3">
+            <strong>Institution:</strong>
+            Ekiti State University (EKSU)
+          </p>
+
+          <p>
+            <strong>Department:</strong>
+            Science Education
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-red-900 text-white py-10">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <h3 class="font-bold text-xl mb-2">
+          Computer Studies Personalized Learning Platform (CSPLP)
+        </h3>
+
+        <p>© Waliyullah-Nusaybah 2026 First Degree Project</p>
+
+        <p class="mt-2">
+          Department of Science Education, Ekiti State University, Ado-Ekiti
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const summaryParticipant = JSON.parse(localStorage.getItem('participant') || 'null');
+
+      if (summaryParticipant) {
+        document.getElementById('preScore').textContent =
+          (summaryParticipant.preTestScore ?? 0) + '/10';
+        document.getElementById('tradScore').textContent =
+          (summaryParticipant.traditionalQuizScore ?? 0) + '/10';
+        document.getElementById('personalScore').textContent =
+          (summaryParticipant.personalizedQuizScore ?? 0) + '/10';
+      }
+    </script>
+
+    <script type="module">
+      const status = document.getElementById('firebaseSaveStatus');
+
+      try {
+        const participant = JSON.parse(localStorage.getItem('participant') || 'null');
+
+        if (!participant) {
+          throw new Error('No participant data found in local storage.');
+        }
+
+        const { db, collection, addDoc, serverTimestamp } = await import('../js/firebase.js');
+
+        await addDoc(collection(db, 'participants'), {
+          ...participant,
+          createdAt: serverTimestamp()
+        });
+
+        status.textContent = 'Your study results were saved successfully.';
+        status.classList.add('text-green-700');
+        console.log('Participant saved successfully');
+      } catch (error) {
+        status.textContent = 'Your study results could not be saved. Please check your connection and try again.';
+        status.classList.add('text-red-700');
+        console.error('Error saving participant:', error);
+      }
+    </script>
+
+  </body>
+</html>
