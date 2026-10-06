@@ -285,7 +285,10 @@
     signInWithEmailAndPassword,
     signOut
   } from '../js/firebase.js';
-  import { deleteDoc } from 'https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js';
+  import {
+    deleteDoc,
+    doc
+  } from 'https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js';
 
   const adminLogin = document.getElementById('adminLogin');
   const dashboardApp = document.getElementById('dashboardApp');
